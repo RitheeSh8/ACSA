@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Modulation of Signals</title>
+<style>
+body {
+    background: linear-gradient(135deg,#000000 0%,#1a1a1a 20%,#4d3b1f 40%,#b8860b 60%,#ffd700 80%,#000000 100%);
+    background-attachment: fixed;
+    background-size: 300% 300%;
+    animation: swirlGradient 25s ease infinite;
+    color: white;
+    font-family: 'Georgia', serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+@keyframes swirlGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+h2, h1 {
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    margin: 10px 0;
+    opacity: 0;
+    transform: translateY(-30px);
+    animation: fadeSlideIn 1.5s ease forwards;
+}
+h2 { font-size: 28px; font-weight: bold; margin-top: 30px; animation-delay: 0.3s; }
+h1 { font-size: 36px; font-weight: bold; animation-delay: 0.8s; }
+@keyframes fadeSlideIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin: 50px 0;
+}
+.mod-btn {
+    background: linear-gradient(90deg, #ffd700, #b8860b, #4d3b1f);
+    color: white;
+    border: none;
+    width: 320px;
+    height: 70px;
+    font-size: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 10px rgba(0,0,0,0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mod-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255,215,0,0.8);
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0; top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.85);
+}
+.modal-content {
+    background-color: #1a1a1a;
+    width: 70%;
+    height: 85%;
+    margin: 3% auto;
+    padding: 25px;
+    border: 2px solid #ffd700;
+    border-radius: 12px;
+    animation: modalPop 0.5s ease;
+    box-shadow: 0 0 40px rgba(255,215,0,0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+@keyframes modalPop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+.close {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: flex-end;
+}
+.images-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+    width: 100%;
+}
+.images-container img {
+    width: 85%;
+    max-width: 650px;
+    height: auto;
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(255,215,0,0.6);
+    transition: transform 0.3s ease;
+}
+.images-container img:hover {
+    transform: scale(1.03);
+}
+@media (max-width: 768px) {
+    .modal { display: none !important; }
+    .mod-btn { pointer-events: none; opacity: 0.6; cursor: not-allowed; }
+    body::after {
+        content: "⚠️ Laptop/Desktop view only";
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        color: #ffd700;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: 'Georgia', serif;
+        z-index: 999;
+    }
+}
+</style>
+</head>
+<body>
+<h2>ANALOG COMMUNICATION</h2>
+<h1>Modulation of Signals</h1>
+<div class="button-container">
+    <button class="mod-btn" onclick="openModal('amModal')">AM Modulation</button>
+    <button class="mod-btn" onclick="openModal('fmModal')">FM Modulation</button>
+    <button class="mod-btn" onclick="openModal('dsbscModal')">DSBSC Modulation</button>
+    <button class="mod-btn" onclick="openModal('ssbscModal')">SSBSC Modulation</button>
+</div>
+
+<div id="amModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('amModal')">&times;</span>
+        <div class="images-container">
+            <img src="mod_images/am_message.png" alt="AM Message">
+            <img src="mod_images/am_carrier.png" alt="AM Carrier">
+            <img src="mod_images/am_modulated.png" alt="AM Modulated">
+        </div>
+    </div>
+</div>
+
+<div id="fmModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('fmModal')">&times;</span>
+        <div class="images-container">
+            <img src="mod_images/fm_message.png" alt="FM Message">
+            <img src="mod_images/fm_carrier.png" alt="FM Carrier">
+            <img src="mod_images/fm_modulated.png" alt="FM Modulated">
+        </div>
+    </div>
+</div>
+
+<div id="dsbscModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('dsbscModal')">&times;</span>
+        <div class="images-container">
+            <img src="mod_images/dsbsc_message.png" alt="DSBSC Message">
+            <img src="mod_images/dsbsc_carrier.png" alt="DSBSC Carrier">
+            <img src="mod_images/dsbsc_modulated.png" alt="DSBSC Modulated">
+        </div>
+    </div>
+</div>
+
+<div id="ssbscModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('ssbscModal')">&times;</span>
+        <div class="images-container">
+            <img src="mod_images/ssbsc_message.png" alt="SSBSC Message">
+            <img src="mod_images/ssbsc_carrier.png" alt="SSBSC Carrier">
+            <img src="mod_images/ssbsc_lsb.png" alt="SSBSC LSB">
+            <img src="mod_images/ssbsc_usb.png" alt="SSBSC USB">
+        </div>
+    </div>
+</div>
+
+<script>
+function openModal(id) {
+    document.getElementById(id).style.display = "block";
+}
+function closeModal(id) {
+    document.getElementById(id).style.display = "none";
+}
+window.onclick = function(e) {
+    ['amModal','fmModal','dsbscModal','ssbscModal'].forEach(id => {
+        const modal = document.getElementById(id);
+        if(e.target == modal) modal.style.display = "none";
+    });
+}
+</script>
+</body>
+</html>
